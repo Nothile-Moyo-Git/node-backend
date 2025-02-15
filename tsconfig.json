@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "types" : [
+      "node", "multer"
+    ],
+    "noResolve": false,
+    "target": "ES6",                          
+    "module": "ES2022",
+    "moduleResolution": "Node",
+    "lib": ["ES6","DOM"],                     
+    "allowJs": true,
+    "outDir": "build",                      
+    "rootDir": "src",       
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "noEmit" : false,
+    "allowSyntheticDefaultImports": true
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+  },
+  "exclude" : [
+    "node_modules"
+  ],
+  "include":[
+    "src/**/*"
+  ]
+}
