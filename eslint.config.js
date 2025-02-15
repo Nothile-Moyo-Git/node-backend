@@ -32,7 +32,9 @@ export default [
     rules: {
       "no-unused-vars": "off",
       "no-undef": "error",
+      "require-yield": "off",
       "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
