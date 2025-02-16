@@ -23,8 +23,7 @@ const MONGODB_PASSWORD = "ShN6Fc4ErMyeUQLA";
 const DATA_API_KEY_NAME = "sororitas";
 const DATA_API_KEY =
   "M3uwPcx2v6YohG7cptMDr0vRnrVUSBlqi3ugUVZAXR87nroftfYJZbMNoSBna6Qv";
-const API_ENDPOINT =
-  "https://eu-west-2.aws.data.mongodb-api.com/app/data-dwrpufm/endpoint/data/v1";
+const API_ENDPOINT = process.env.API_ENDPOINT;
 
 // MongoDB Uri
 // Note: To create this URL, copy the connect content and replace the rewrite with the url of the database
