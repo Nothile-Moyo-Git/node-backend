@@ -14,21 +14,21 @@
 
 // Import Mongoose
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // MongoDB url
-const MONGODB_URI =
-  "mongodb+srv://nothile:ShN6Fc4ErMyeUQLA@backend.zgutxpi.mongodb.net/backend?retryWrites=true&w=majority";
-const MONGODB_USERNAME = "nothile";
-const MONGODB_PASSWORD = "ShN6Fc4ErMyeUQLA";
-const DATA_API_KEY_NAME = "sororitas";
-const DATA_API_KEY =
-  "M3uwPcx2v6YohG7cptMDr0vRnrVUSBlqi3ugUVZAXR87nroftfYJZbMNoSBna6Qv";
+const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_USERNAME = process.env.MONGODB_USERNAME;
+const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
+const DATA_API_KEY_NAME = process.env.DATA_API_KEY_NAME;
+const DATA_API_KEY = process.env.DATA_API_KEY;
 const API_ENDPOINT = process.env.API_ENDPOINT;
 
 // MongoDB Uri
 // Note: To create this URL, copy the connect content and replace the rewrite with the url of the database
-const SESSION_URI =
-  "mongodb+srv://nothile:ShN6Fc4ErMyeUQLA@backend.zgutxpi.mongodb.net/backend";
+const SESSION_URI = process.env.SESSION_URI;
 
 // Create our Mongoose connection. Mongoose is an ODM which is basically an ORM but for collections instead of tables/schemas
 const createMongooseConnection = async (callback: () => void) => {
