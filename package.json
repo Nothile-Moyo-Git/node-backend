@@ -9,7 +9,7 @@
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix",
     "babel": "npx babel src --out-dir build",
-    "build": "NODE_ENV=production & rimraf ./build && tsc && npx eslint build --fix"
+    "build": "set NODE_ENV=production & rimraf ./api && tsc && npx eslint api --fix"
   },
   "keywords": [],
   "author": "",

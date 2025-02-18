@@ -10,7 +10,7 @@
     "moduleResolution": "Node",
     "lib": ["ES6","DOM"],                     
     "allowJs": true,
-    "outDir": "build",                      
+    "outDir": "api",                      
     "rootDir": "src",       
     "esModuleInterop": true,
     "resolveJsonModule": true,
