@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx ts-node ./src/index.ts",
+    "start": "npx ts-node src/index.ts",
     "dev": "set NODE_ENV=development & nodemon src/index.ts",
+    "prod": "node api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix",
