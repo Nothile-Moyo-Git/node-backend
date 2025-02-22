@@ -14,6 +14,11 @@ import cors from "cors";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+
+// We define our __dirname and __filename here since we wouldn't be able to reference them since we're using type : module in our package.json
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import feedRoutes from "./routes/feed";
 import errorRoutes from "./routes/error";
 import socketRoutes from "./routes/socket";
@@ -51,9 +56,6 @@ declare module "express-session" {
     csrfToken?: string;
   }
 }
-// We define our __dirname and __filename here since we wouldn't be able to reference them since we're using type : module in our package.json
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Be able to instantiate our express server
 const app = express();
