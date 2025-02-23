@@ -15,7 +15,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "noEmit" : false,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
   },
   "ts-node": {
     "esm": true,
