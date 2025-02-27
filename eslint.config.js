@@ -30,7 +30,6 @@ export default [
       }
     },
     rules: {
-      "endOfLine": "auto",
       "no-unused-vars": "off",
       "no-undef": "error",
       "require-yield": "off",
