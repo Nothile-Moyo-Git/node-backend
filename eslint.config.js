@@ -33,6 +33,12 @@ export default [
       "no-unused-vars": "off",
       "no-undef": "error",
       "require-yield": "off",
+      "prettier/prettier" : [
+        "error",
+        {
+          "endOfLine": "auto",
+        }
+      ],
       "@typescript-eslint/no-require-imports": "off",
       "@typescript-eslint/no-unused-expressions": "off",
       "@typescript-eslint/no-unused-vars": [
