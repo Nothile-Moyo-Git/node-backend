@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "add-extensions": "ts-add-js-extension --dir=api --showChanges",
     "dev": "set NODE_ENV=development & nodemon src/index.ts",
     "prod": "node api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
