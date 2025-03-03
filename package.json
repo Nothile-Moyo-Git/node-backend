@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "set NODE_ENV=development & nodemon src/index.ts",
-    "prod": "node api/index.js",
+    "prod": "set NODE_ENV=production & node api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix",

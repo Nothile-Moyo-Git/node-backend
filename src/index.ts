@@ -184,9 +184,14 @@ app.use(errorRoutes);
 const startServer = async () => {
   // Create a Mongoose connection
   await createMongooseConnection(() => {
+    const url =
+      process.env.NODE_END === "development"
+        ? process.env.DEVELOPMENT_URL
+        : process.env.PRODUCTION_URL;
+
     // Listen to the port
     const server = app.listen(port, () => {
-      console.log(`[Server]: Server is running on http://localhost:${port}`);
+      console.log(`[Server]: Server is running on ${url}:${port}`);
     });
 
     // Instantiate our IO
