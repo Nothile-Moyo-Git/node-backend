@@ -5,8 +5,6 @@
  * The index file. This serves as our main method.
  * We start our server and create our connection pool here
  *
- * @method startServer : async () => Promise<void>
- * @method generateCSRFToken : () => number
  */
 
 // Main imports in order to run the server
