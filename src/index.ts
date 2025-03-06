@@ -185,7 +185,7 @@ const startServer = async () => {
   // Create a Mongoose connection
   await createMongooseConnection(() => {
     const url =
-      process.env.NODE_END === "development"
+      process.env.NODE_ENV === "development"
         ? process.env.DEVELOPMENT_URL
         : process.env.PRODUCTION_URL;
 
