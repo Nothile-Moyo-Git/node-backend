@@ -9,15 +9,23 @@
 
 import { Server } from "socket.io";
 import { IncomingMessage, Server as HTTPServer, ServerResponse } from "http";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 let io: Server;
 
 export const init = (
   server: HTTPServer<typeof IncomingMessage, typeof ServerResponse>,
 ) => {
+  const socketUrl =
+    process.env.NODE_ENV === "development"
+      ? process.env.SOCKET_DEV_URL
+      : process.env.SOCKET_PROD_URL;
+
   io = new Server(server, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: socketUrl,
     },
   });
 
