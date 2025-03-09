@@ -185,14 +185,9 @@ const startServer = async () => {
   // Create a Mongoose connection
   await createMongooseConnection(() => {
     const instance =
-      process.env.NODE_ENV === "development"
+      process.env.NODE_ENV.trim() === "development"
         ? `${process.env.DEVELOPMENT_URL}:${port}`
         : process.env.PRODUCTION_URL;
-
-    console.log("\n", "process");
-    console.log(process.env.NODE_ENV);
-    console.log("development");
-    console.log(process.env.NODE_ENV === "development");
 
     // Listen to the port
     const server = app.listen(port, () => {
