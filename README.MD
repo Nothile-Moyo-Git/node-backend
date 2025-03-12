@@ -108,6 +108,8 @@ Production builds can be found in the _"api"_ folder. The production is your com
 npm run build
 ```
 
+>[View production](https://node-backend-k4sz.onrender.com/test)
+
 **This application is deployed on Render for the backend only. The .env files have been copied on vercel and have *NOT* been pushed to git, you'll need to email me to request it.**
 
 -----
