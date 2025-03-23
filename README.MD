@@ -4,20 +4,30 @@
 
 **Welcome :)**
 
-This is the back end documentation for the application. You can find more in depth information about the front end here. Please view the rest of the README below on information on the tech stack, and working with the codebase.
+This is the back end documentation for the application. You can find more in depth information about the back end here. Please view the rest of the README below on information on the tech stack, and working with the codebase.
 
 -----
 
 ### Commands
 
-> Start local backend server
+> Start local development server (http://localhost:4000)
 ```
-npm run start
+npm run dev
 ```
 
-> Check lint
+> Start local production server (http://localhost:4000)
+```
+npm run prod
+```
+
+> Check lint without fixes
 ```
 npm run lint
+```
+
+> Check lint and fix issues where possible
+```
+npm run lint:fix
 ```
 
 > Run tests
@@ -28,11 +38,6 @@ npm run test
 > Create a production build
 ```
 npm run build
-```
-
-> Deploy a production build
-```
-npm run deploy
 ```
 
 -----
@@ -87,7 +92,7 @@ You can send me an email by request [here](mailto:nothile1@gmail.com)
 
 >[JWT](https://jwt.io/)
 
-**GraphQL**. GraphQL is "Graph Query Language". You can find more information about this on the "GraphQL Endpoints" section of this document.
+**GraphQL**. GraphQL is "Graph Query Language". You can find more information about this on the "GraphQL Endpoints" section of this document. It handles most of our endpoints, with REST being used for features such as file uploads.
 
 >[GraphQL](https://graphql.org/)
 
@@ -110,7 +115,7 @@ npm run build
 
 >[View production](https://node-backend-k4sz.onrender.com/test)
 
-**This application is deployed on Render for the backend only. The .env files have been copied on vercel and have *NOT* been pushed to git, you'll need to email me to request it.**
+**For security purposes, this application is deployed on Render for the backend only. The .env files have been copied on render and have *NOT* been pushed to git, you'll need to email me to request it.**
 
 -----
 
@@ -132,13 +137,17 @@ You can find the routes from _"backend/src/routes"_. The routes assign api reque
 
 No views are rendered with these routes as the web application is de-coupled. The routes are written in express which are then handled by the server.
 
-Unlike the front end, requests are handled without a basename.
+Unlike the front end, requests are handled without a basename, and instead use the current domain to handle them.
+
+**Note: Routes work the same in production as they do in develop except for file uploading technology**
 
 -----
 
 ### File Storage
 
 Multer is used to handle file uploads. This works by using an event handler on the front end to turn the image into a base64 image. This is sent to the backend and decoded back into an image. In the _index.ts_ file, we set up the location of where we store the file (which is based on the date/month of upload). Files are saved with a name that is used to format them.
+
+For production builds, unfortunately, this feature has been flagged and disabled. This is because of the maintenance costs associated with persistent disks, which would result in images being deleted when a new query is requested. Because of this, the multer code remains but file uploads are disabled on production builds.
 
 **Note: If you change the name of an image, it won't be deleted as there won't be a reference point anymore**.
 
@@ -149,6 +158,10 @@ Multer is used to handle file uploads. This works by using an event handler on t
 The socket.io implemention acts as an extension to the express server found in _"index.ts"_. You can find the socket code in _"socket.ts"_. This code uses a module export so that the socket functionality (mostly emitting and broadcasting) can be reused on individual controllers as opposed to just the main index file. 
 
 Regarding the livechat, it both uses the live server but also stores the messages in the "chats" collection found in MongoDB.
+
+The sockets are also used for message updates such as a new post being created from the backend. They are usually rendered as modals in the front end when this occurs.
+
+**Note: WebSockets are a great means of livestreaming data, chat logs and other features that require a "polling" or more flexible request system.**
 
 -----
 
@@ -202,6 +215,10 @@ For passwords in the backend, they are encrypted using _"bcrypt"_ which are stor
 
 Regarding controllers, queries check if the user is logged in and also return responses regarding this. This response is used by the front end to determine what should happen, which is usually a redirect onto the login page.
 
+### Overall thoughts
 
+I learned a lot working on this backend, mostly improving my understanding of how the backend works, the point of middleware, and how to best break down features.
 
+I think that learning Node.js is a valuable skill for any front end / full stack Engineer. 
 
+Node.js is an extremely flexible runtime with a lot of diversity and options on how you want to approach your backend, but this can lead to a shoestring-esque solution which will be hard to update.
