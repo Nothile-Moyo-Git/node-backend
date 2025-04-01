@@ -19,7 +19,7 @@ import { ChatInterface } from "../@types/index";
 // Setting our types to be used in Mongoose
 type ChatModel = Model<ChatInterface, object, object>;
 
-// Define our schema for the Posts collection in the backend using Mongoose
+// Define our schema for the Chat collection in the backend using Mongoose
 const chatSchema = new mongoose.Schema<ChatInterface>(
   {
     userIds: { type: [mongoose.Schema.Types.ObjectId], required: true },
