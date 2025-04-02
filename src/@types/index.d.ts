@@ -59,13 +59,9 @@ export interface ChatInterface {
   userIds: ObjectId[];
 }
 
-export interface FileDetails {
+export interface FilesInterface {
   fileName: string;
   filePath: string;
-}
-
-export interface FilesInterface {
-  files: FileDetails[];
 }
 
 export interface CreatorInterface {
