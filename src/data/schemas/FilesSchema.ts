@@ -1,5 +1,5 @@
 /**
- * Date created : 24/10/2024
+ * Date created : 02/04/2024
  *
  * Author : Nothile Moyo
  *
@@ -9,7 +9,22 @@
  *
  */
 
-import { GraphQLObjectType, GraphQLSchema, GraphQLString } from "graphql";
+import {
+  GraphQLFloat,
+  GraphQLList,
+  GraphQLObjectType,
+  GraphQLSchema,
+  GraphQLString,
+} from "graphql";
+import { GetFilePathsResolver } from "../resolvers/FileResolvers";
+
+const FileType = new GraphQLObjectType({
+  name: "files",
+  fields: {
+    _id: { type: GraphQLString },
+    fileLastUpdated: { type: GraphQLString },
+  },
+});
 
 // Defining our query in order to get all the fileNames
 // Queries have a name, and the fields have a type which is a GraphQLObjectType
@@ -18,42 +33,25 @@ import { GraphQLObjectType, GraphQLSchema, GraphQLString } from "graphql";
 const FileQueries = new GraphQLObjectType({
   name: "fileQueries",
   fields: {
-    GetFilesResponse: {
+    GetFilePathsResponse: {
       type: new GraphQLObjectType({
-        name: "getFiles",
+        name: "getFilePaths",
         fields: {
-          filePath: {
-            type: GraphQLString,
+          status: {
+            type: GraphQLFloat,
           },
-          fileName: {
-            type: GraphQLString,
+          files: {
+            type: new GraphQLList(FileType),
           },
         },
       }),
-      resolve: () => {},
-    },
-  },
-});
-
-// Defining our
-const FileMutations = new GraphQLObjectType({
-  name: "fileMutations",
-  fields: {
-    AddFileDetailsResponse: {
-      type: new GraphQLObjectType({
-        name: "AddFile",
-        fields: {
-            
-        },
-      }),
-      resolve: () => {},
+      resolve: GetFilePathsResolver,
     },
   },
 });
 
 const FilesSchema = new GraphQLSchema({
   query: FileQueries,
-  mutation: FileMutations,
 });
 
 export default FilesSchema;
