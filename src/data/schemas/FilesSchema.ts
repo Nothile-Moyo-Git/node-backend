@@ -10,7 +10,7 @@
  */
 
 import {
-  GraphQLFloat,
+  GraphQLInt,
   GraphQLList,
   GraphQLObjectType,
   GraphQLSchema,
@@ -21,8 +21,8 @@ import { GetFilePathsResolver } from "../resolvers/FileResolvers";
 const FileType = new GraphQLObjectType({
   name: "files",
   fields: {
-    _id: { type: GraphQLString },
-    fileLastUpdated: { type: GraphQLString },
+    filePath: { type: GraphQLString },
+    fileName: { type: GraphQLString },
   },
 });
 
@@ -38,7 +38,7 @@ const FileQueries = new GraphQLObjectType({
         name: "getFilePaths",
         fields: {
           status: {
-            type: GraphQLFloat,
+            type: GraphQLInt,
           },
           files: {
             type: new GraphQLList(FileType),

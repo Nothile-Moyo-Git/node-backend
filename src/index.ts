@@ -174,6 +174,9 @@ app.all("/graphql/posts", createHandler({ schema: schemas.PostSchema }));
 // Auth resolver graphql
 app.all("/graphql/auth", createHandler({ schema: schemas.AuthSchema }));
 
+// File resolver graphql schema instantiation
+app.all("/graphql/files", createHandler({ schema: schemas.FilesSchema }));
+
 // Return a GraphQL error
 app.all("/graphql/*", createHandler({ schema: schemas.ErrorSchema }));
 
