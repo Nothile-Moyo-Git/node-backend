@@ -45,6 +45,12 @@ const fileDataFields = {
   isFileValid: { type: GraphQLBoolean },
 };
 
+// carousel layout for fileData when used in production
+const carouselFileDataFields = {
+  filaeName: { type: GraphQLString },
+  imageUrl: { type: GraphQLString },
+};
+
 // Create a fileType that we return
 const FileDataObjectType = new GraphQLObjectType({
   name: "FileObject",
