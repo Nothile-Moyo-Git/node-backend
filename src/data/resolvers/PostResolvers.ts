@@ -443,6 +443,9 @@ const PostDeletePostResolver = async (
 
     // If there's no post, return an error
     if (post && user) {
+      // Delete the post image before deleting it from the backend, otherwise the image remains
+      deleteFile(post.imageUrl);
+
       await Post.findByIdAndDelete(postId);
 
       const filteredPosts = user.posts
@@ -461,9 +464,6 @@ const PostDeletePostResolver = async (
       highestPageNumber = Math.ceil(numberOfPosts / perPage);
 
       await user.save();
-
-      // Check logged in User
-      deleteFile(post.imageUrl);
     }
 
     return {

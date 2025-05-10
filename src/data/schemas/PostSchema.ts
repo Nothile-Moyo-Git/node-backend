@@ -45,12 +45,6 @@ const fileDataFields = {
   isFileValid: { type: GraphQLBoolean },
 };
 
-// carousel layout for fileData when used in production
-const carouselFileDataFields = {
-  filaeName: { type: GraphQLString },
-  imageUrl: { type: GraphQLString },
-};
-
 // Create a fileType that we return
 const FileDataObjectType = new GraphQLObjectType({
   name: "FileObject",
@@ -61,6 +55,15 @@ const FileDataObjectType = new GraphQLObjectType({
 const FileDataInputType = new GraphQLInputObjectType({
   name: "FileInput",
   fields: fileDataFields,
+});
+
+// carousel layout for fileData when used in production
+const CarouselFileDataType = new GraphQLInputObjectType({
+  name: "CarouselFileData",
+  fields: {
+    fileName: { type: GraphQLString },
+    imageUrl: { type: GraphQLString },
+  },
 });
 
 // Define the post query request handlers for GraphQL
@@ -140,6 +143,7 @@ const PostMutations = new GraphQLObjectType({
         content: { type: GraphQLString },
         userId: { type: GraphQLString },
         fileData: { type: FileDataInputType },
+        carouselFileData: { type: CarouselFileDataType },
       },
       resolve: postResolvers.PostCreatePostResolver,
     },

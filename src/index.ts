@@ -75,7 +75,7 @@ const fileStorage = multer.diskStorage({
     callback: (error: Error | null, destination: string) => void,
   ) => {
     // Set the folder path
-    const folderPath = `../frontend/src/images/${getFolderPathFromDate()}`;
+    const folderPath = `../frontend/src/uploads/${getFolderPathFromDate()}`;
 
     // Check if our folder path already exists
     const folderExists = fs.existsSync(folderPath);
