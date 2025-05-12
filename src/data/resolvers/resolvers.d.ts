@@ -60,6 +60,11 @@ export interface GetPostsResolverArgs {
   currentPage: number;
 }
 
+export interface CarouselFileData {
+  fileName: string;
+  filePath: string;
+}
+
 export interface FileDataResolverArgs {
   fileName: string;
   imageUrl: string;
@@ -73,7 +78,8 @@ export interface PostCreatePostResolverArgs {
   title: string;
   content: string;
   userId: string;
-  fileData: FileDataResolverArgs;
+  fileData?: FileDataResolverArgs;
+  carouselFileData?: CarouselFileData;
 }
 
 export interface PostGetPostResolverArgs {

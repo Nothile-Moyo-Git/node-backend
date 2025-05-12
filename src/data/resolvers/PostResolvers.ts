@@ -104,6 +104,12 @@ const PostCreatePostResolver = async (
     const content = args.content;
     const userId = args.userId;
     const fileData = args.fileData;
+    const carouselFileData = args.carouselFileData
+      ? args?.carouselFileData
+      : null;
+
+    console.log("Carousel file data");
+    console.log(carouselFileData);
 
     // Validate our inputs
     const isTitleValid: boolean = title.length >= 3;
