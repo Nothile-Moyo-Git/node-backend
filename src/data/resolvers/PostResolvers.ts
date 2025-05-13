@@ -119,10 +119,6 @@ const PostCreatePostResolver = async (
     console.log(carouselFileData);
     console.log("\n\n");
 
-    // Logic if we upload a file, this should be for development
-
-    // Logic if we chose an image from the carousel, this should be for production
-
     // Validate our inputs
     const isTitleValid: boolean = title.length >= 3;
     const isContentValid: boolean =

@@ -117,7 +117,7 @@ export const testEndpoint = (
   response: Response,
 ) => {
   // Get environment data for production
-  const environment = process.env.NODE_END.trim();
+  const environment = process.env.NODE_ENV.trim();
 
   // Send a response to the browser or the frontend
   response.status(201);
