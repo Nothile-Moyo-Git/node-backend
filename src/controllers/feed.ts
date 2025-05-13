@@ -116,7 +116,10 @@ export const testEndpoint = (
   request: FeedRequestInterface,
   response: Response,
 ) => {
+  // Get environment data for production
+  const environment = process.env.NODE_END.trim();
+
   // Send a response to the browser or the frontend
   response.status(201);
-  response.json({ message: "Test" });
+  response.json({ message: "Test", environment });
 };

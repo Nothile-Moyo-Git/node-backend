@@ -103,13 +103,25 @@ const PostCreatePostResolver = async (
     const title = args.title;
     const content = args.content;
     const userId = args.userId;
-    const fileData = args.fileData;
+    const fileData = args.fileData ? args.fileData : null;
     const carouselFileData = args.carouselFileData
       ? args?.carouselFileData
       : null;
 
+    const environment = process.env.NODE_ENV.trim();
+
+    console.log("\n\n");
+    console.log("Environment");
+    console.log(environment);
+    console.log("\n\n");
+
     console.log("Carousel file data");
     console.log(carouselFileData);
+    console.log("\n\n");
+
+    // Logic if we upload a file, this should be for development
+
+    // Logic if we chose an image from the carousel, this should be for production
 
     // Validate our inputs
     const isTitleValid: boolean = title.length >= 3;
