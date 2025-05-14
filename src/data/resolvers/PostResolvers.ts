@@ -105,7 +105,7 @@ const PostCreatePostResolver = async (
     const userId = args.userId;
     const fileData = args.fileData ? args.fileData : null;
     const carouselFileData = args.carouselFileData
-      ? args?.carouselFileData
+      ? args.carouselFileData
       : null;
 
     const environment = process.env.NODE_ENV.trim();
@@ -121,11 +121,20 @@ const PostCreatePostResolver = async (
 
     let fileName = null;
     let imageUrl = null;
+    let isFileValid = true;
+    let isFileTypeValid = true;
+    let isImageUrlValid = true;
+    let isFileSizeValid = true;
 
     // Logic if we upload a file, this should be for development
     if (environment === "development") {
+      // Getting file data
       fileName = fileData.fileName;
       imageUrl = fileData.imageUrl;
+      isFileValid = fileData.isFileValid;
+      isFileTypeValid = fileData.isFileTypeValid;
+      isImageUrlValid = fileData.isImageUrlValid;
+      isFileSizeValid = fileData.isFileSizeValid;
     } else {
       // Logic if we chose an image from the carousel, this should be for production
       fileName = carouselFileData.fileName;
@@ -136,12 +145,6 @@ const PostCreatePostResolver = async (
     const isTitleValid: boolean = title.length >= 3;
     const isContentValid: boolean =
       content.length >= 6 && content.length <= 400;
-
-    // Getting file data
-    const isFileValid: boolean = fileData.isFileValid;
-    const isFileTypeValid: boolean = fileData.isFileTypeValid;
-    const isImageUrlValid: boolean = fileData.isImageUrlValid;
-    const isFileSizeValid: boolean = fileData.isFileSizeValid;
 
     // If any of our conditions are invalid, delete the file we just uploaded
     if (
