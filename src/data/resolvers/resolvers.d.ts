@@ -62,7 +62,7 @@ export interface GetPostsResolverArgs {
 
 export interface CarouselFileData {
   fileName: string;
-  filePath: string;
+  imageUrl: string;
 }
 
 export interface FileDataResolverArgs {

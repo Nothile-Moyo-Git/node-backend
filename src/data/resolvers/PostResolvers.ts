@@ -138,7 +138,7 @@ const PostCreatePostResolver = async (
     } else {
       // Logic if we chose an image from the carousel, this should be for production
       fileName = carouselFileData.fileName;
-      imageUrl = carouselFileData.filePath;
+      imageUrl = carouselFileData.imageUrl;
     }
 
     // Validate our inputs

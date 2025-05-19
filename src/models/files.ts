@@ -24,7 +24,7 @@ type FilesModel = Model<FilesInterface, object, object>;
 // Define our schema for the Chat collection in the backend using Mongoose
 const fileSchema = new mongoose.Schema<FilesInterface>(
   {
-    filePath: {
+    imageUrl: {
       type: String,
       required: true,
     },

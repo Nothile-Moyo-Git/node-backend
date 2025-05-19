@@ -21,7 +21,7 @@ import { GetFilePathsResolver } from "../resolvers/FileResolvers";
 const FileType = new GraphQLObjectType({
   name: "files",
   fields: {
-    filePath: { type: GraphQLString },
+    imageUrl: { type: GraphQLString },
     fileName: { type: GraphQLString },
   },
 });

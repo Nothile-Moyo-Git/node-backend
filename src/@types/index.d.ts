@@ -61,7 +61,7 @@ export interface ChatInterface {
 
 export interface FilesInterface {
   fileName: string;
-  filePath: string;
+  imageUrl: string;
 }
 
 export interface CreatorInterface {
