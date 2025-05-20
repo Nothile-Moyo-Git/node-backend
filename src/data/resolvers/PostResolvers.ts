@@ -109,6 +109,8 @@ const PostCreatePostResolver = async (
       : null;
 
     const environment = process.env.NODE_ENV.trim();
+    const fileLastUpdated =
+      environment === "production" ? getCurrentMonthAndYear() : null;
 
     console.log("\n\n");
     console.log("Environment");
@@ -127,7 +129,7 @@ const PostCreatePostResolver = async (
     let isFileSizeValid = true;
 
     // Logic if we upload a file, this should be for development
-    if (environment === "development") {
+    if (environment === "production") {
       // Getting file data
       fileName = fileData.fileName;
       imageUrl = fileData.imageUrl;
@@ -160,7 +162,7 @@ const PostCreatePostResolver = async (
 
     const post = new Post({
       fileName: fileName,
-      fileLastUpdated: getCurrentMonthAndYear(),
+      fileLastUpdated: fileLastUpdated,
       title: title,
       content: content,
       imageUrl: imageUrl,
@@ -463,6 +465,9 @@ const PostDeletePostResolver = async (
     highestPageNumber = 1;
 
   try {
+    // Since production uses the carousel
+    const environment = process.env.NODE_ENV.trim();
+
     // Get post data
     const post = await Post.findById(new ObjectId(postId));
 
@@ -472,7 +477,9 @@ const PostDeletePostResolver = async (
     // If there's no post, return an error
     if (post && user) {
       // Delete the post image before deleting it from the backend, otherwise the image remains
-      deleteFile(post.imageUrl);
+      if (environment === "production") {
+        deleteFile(post.imageUrl);
+      }
 
       await Post.findByIdAndDelete(postId);
 
