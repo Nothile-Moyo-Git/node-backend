@@ -110,7 +110,7 @@ const PostCreatePostResolver = async (
 
     const environment = process.env.NODE_ENV.trim();
     const fileLastUpdated =
-      environment === "production" ? getCurrentMonthAndYear() : null;
+      environment === "production" ? getCurrentMonthAndYear() : "";
 
     console.log("\n\n");
     console.log("Environment");
@@ -120,6 +120,9 @@ const PostCreatePostResolver = async (
     console.log("Carousel file data");
     console.log(carouselFileData);
     console.log("\n\n");
+
+    console.log("File last updated");
+    console.log(fileLastUpdated);
 
     let fileName = null;
     let imageUrl = null;
