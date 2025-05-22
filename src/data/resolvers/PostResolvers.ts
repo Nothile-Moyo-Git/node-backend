@@ -112,18 +112,6 @@ const PostCreatePostResolver = async (
     const fileLastUpdated =
       environment === "production" ? getCurrentMonthAndYear() : "";
 
-    console.log("\n\n");
-    console.log("Environment");
-    console.log(environment);
-    console.log("\n\n");
-
-    console.log("Carousel file data");
-    console.log(carouselFileData);
-    console.log("\n\n");
-
-    console.log("File last updated");
-    console.log(fileLastUpdated);
-
     let fileName = null;
     let imageUrl = null;
     let isFileValid = true;
