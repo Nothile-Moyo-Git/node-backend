@@ -108,10 +108,12 @@ const PostCreatePostResolver = async (
       ? args.carouselFileData
       : null;
 
+    // Get the environment we're working with so we can feature flag the carousel / file upload functionality
     const environment = process.env.NODE_ENV.trim();
     const fileLastUpdated =
       environment === "production" ? getCurrentMonthAndYear() : "";
 
+    // Default values so we can set them agnostic of environment
     let fileName = null;
     let imageUrl = null;
     let isFileValid = true;
