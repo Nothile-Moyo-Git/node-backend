@@ -168,6 +168,7 @@ const PostMutations = new GraphQLObjectType({
         postId: { type: GraphQLString },
         userId: { type: GraphQLString },
         fileData: { type: FileDataInputType },
+        carouselFileData: { type: CarouselFileDataType },
       },
       resolve: postResolvers.PostUpdatePostResolver,
     },

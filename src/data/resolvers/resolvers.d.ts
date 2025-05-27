@@ -96,6 +96,7 @@ export interface PostUpdatePostResolverArgs {
   userId: string;
   content: string;
   fileData: FileDataResolverArgs;
+  carouselFileData?: CarouselFileData;
   postId: string;
 }
 

@@ -355,6 +355,7 @@ const PostUpdatePostResolver = async (
   // Validating the fields in the backend so they can't be exploited
   const isTitleValid = title.length >= 3;
   const isContentValid = content.length >= 6 && content.length <= 400;
+  const carouselFileData = args.carouselFileData ? args.carouselFileData : null;
   const isFileUploadSuccessful = fileData
     ? fileData.isImageUrlValid &&
       fileData.isFileSizeValid &&
