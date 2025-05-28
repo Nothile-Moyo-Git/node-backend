@@ -356,16 +356,28 @@ const PostUpdatePostResolver = async (
   const isTitleValid = title.length >= 3;
   const isContentValid = content.length >= 6 && content.length <= 400;
   const carouselFileData = args.carouselFileData ? args.carouselFileData : null;
-  const isFileUploadSuccessful = fileData
-    ? fileData.isImageUrlValid &&
-      fileData.isFileSizeValid &&
-      fileData.isFileTypeValid &&
-      fileData.isFileValid
-    : false;
+  let isImageUrlValid = true;
+  let isFileSizeValid = true;
+  let isFileTypeValid = true;
+  let isFileValid = true;
+
+  if (fileData) {
+    isImageUrlValid = fileData.isImageUrlValid;
+    isFileSizeValid = fileData.isFileSizeValid;
+    isFileTypeValid = fileData.isFileTypeValid;
+    isFileValid = fileData.isFileValid;
+  }
+
+  const isFileUploadSuccessful =
+    isImageUrlValid && isFileSizeValid && isFileTypeValid && isFileValid;
+
+  console.log("Carousel file data");
+  console.log(carouselFileData);
 
   try {
     if (isFileUploadSuccessful && (!isTitleValid || !isContentValid)) {
-      deleteFile(fileData.imageUrl);
+      // Delete the image if we fail to edit the post
+      //deleteFile(fileData.imageUrl);
       return {
         post: null,
         status: 200,
@@ -396,7 +408,7 @@ const PostUpdatePostResolver = async (
       if (post && isPostCreator) {
         // Delete the old image as we update the url with the new one
         if (isFileUploadSuccessful) {
-          deleteFile(post.imageUrl);
+          //deleteFile(post.imageUrl);
           post.fileName = fileData.fileName;
           post.fileLastUpdated = getCurrentMonthAndYear();
           post.imageUrl = fileData.imageUrl;
@@ -406,7 +418,7 @@ const PostUpdatePostResolver = async (
         post.content = content;
         post.title = title;
 
-        await post.save();
+        // await post.save();
       }
 
       return {
