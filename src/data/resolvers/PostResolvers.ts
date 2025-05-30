@@ -30,6 +30,11 @@ const client = new MongoClient(MONGODB_URI);
 const database = client.db("backend");
 const postsCollection = database.collection("posts");
 
+// Get the environment we're working with so we can feature flag the carousel / file upload functionality
+const environment = process.env.NODE_ENV.trim();
+const fileLastUpdated =
+  environment === "production" ? getCurrentMonthAndYear() : "";
+
 const perPage = 3;
 
 /**
@@ -107,11 +112,6 @@ const PostCreatePostResolver = async (
     const carouselFileData = args.carouselFileData
       ? args.carouselFileData
       : null;
-
-    // Get the environment we're working with so we can feature flag the carousel / file upload functionality
-    const environment = process.env.NODE_ENV.trim();
-    const fileLastUpdated =
-      environment === "production" ? getCurrentMonthAndYear() : "";
 
     // Default values so we can set them agnostic of environment
     let fileName = null;
@@ -361,7 +361,7 @@ const PostUpdatePostResolver = async (
   let isFileTypeValid = true;
   let isFileValid = true;
 
-  if (fileData) {
+  if (Object.keys(fileData).length !== 0) {
     isImageUrlValid = fileData.isImageUrlValid;
     isFileSizeValid = fileData.isFileSizeValid;
     isFileTypeValid = fileData.isFileTypeValid;
@@ -371,13 +371,13 @@ const PostUpdatePostResolver = async (
   const isFileUploadSuccessful =
     isImageUrlValid && isFileSizeValid && isFileTypeValid && isFileValid;
 
-  console.log("Carousel file data");
-  console.log(carouselFileData);
-
   try {
     if (isFileUploadSuccessful && (!isTitleValid || !isContentValid)) {
-      // Delete the image if we fail to edit the post
-      //deleteFile(fileData.imageUrl);
+      if (environment === "production") {
+        // Delete the image if we fail to edit the post and we're on development
+        // deleteFile(fileData.imageUrl);
+      }
+
       return {
         post: null,
         status: 200,
@@ -406,19 +406,29 @@ const PostUpdatePostResolver = async (
       }
 
       if (post && isPostCreator) {
+        post.fileLastUpdated = fileLastUpdated;
         // Delete the old image as we update the url with the new one
         if (isFileUploadSuccessful) {
-          //deleteFile(post.imageUrl);
-          post.fileName = fileData.fileName;
-          post.fileLastUpdated = getCurrentMonthAndYear();
-          post.imageUrl = fileData.imageUrl;
+          if (environment === "production") {
+            //deleteFile(post.imageUrl);
+            post.fileName = fileData.fileName;
+            post.imageUrl = fileData.imageUrl;
+          }
+
+          if (environment === "development") {
+            post.fileName = carouselFileData.fileName;
+            post.imageUrl = carouselFileData.imageUrl;
+          }
         }
 
         // Update post details
         post.content = content;
         post.title = title;
 
-        // await post.save();
+        console.log("Current post data");
+        console.log(post);
+
+        await post.save();
       }
 
       return {
