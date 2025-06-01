@@ -494,7 +494,7 @@ const PostDeletePostResolver = async (
     if (post && user) {
       // Delete the post image before deleting it from the backend, otherwise the image remains
       if (environment === "production") {
-        deleteFile(post.imageUrl);
+        // deleteFile(post.imageUrl);
       }
 
       await Post.findByIdAndDelete(postId);
