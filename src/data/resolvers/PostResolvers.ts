@@ -33,7 +33,7 @@ const postsCollection = database.collection("posts");
 // Get the environment we're working with so we can feature flag the carousel / file upload functionality
 const environment = process.env.NODE_ENV.trim();
 const fileLastUpdated =
-  environment === "production" ? getCurrentMonthAndYear() : "";
+  environment === "development" ? getCurrentMonthAndYear() : "";
 
 const perPage = 3;
 
@@ -122,7 +122,7 @@ const PostCreatePostResolver = async (
     let isFileSizeValid = true;
 
     // Logic if we upload a file, this should be for development
-    if (environment === "production") {
+    if (environment === "development") {
       // Getting file data
       fileName = fileData.fileName;
       imageUrl = fileData.imageUrl;
@@ -409,13 +409,13 @@ const PostUpdatePostResolver = async (
         post.fileLastUpdated = fileLastUpdated;
         // Delete the old image as we update the url with the new one
         if (isFileUploadSuccessful) {
-          if (environment === "production") {
+          if (environment === "development") {
             //deleteFile(post.imageUrl);
             post.fileName = fileData.fileName;
             post.imageUrl = fileData.imageUrl;
           }
 
-          if (environment === "development") {
+          if (environment === "production") {
             post.fileName = carouselFileData.fileName;
             post.imageUrl = carouselFileData.imageUrl;
           }
@@ -493,7 +493,7 @@ const PostDeletePostResolver = async (
     // If there's no post, return an error
     if (post && user) {
       // Delete the post image before deleting it from the backend, otherwise the image remains
-      if (environment === "production") {
+      if (environment === "development") {
         // deleteFile(post.imageUrl);
       }
 
