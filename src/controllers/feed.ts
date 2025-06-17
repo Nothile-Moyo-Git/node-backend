@@ -121,5 +121,9 @@ export const testEndpoint = (
 
   // Send a response to the browser or the frontend
   response.status(201);
-  response.json({ message: "Test", environment });
+  response.json({
+    message: "Test",
+    port: process.env.PORT,
+    environment,
+  });
 };
