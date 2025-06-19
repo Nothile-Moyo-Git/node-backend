@@ -23,6 +23,9 @@ export const init = (
       ? process.env.SOCKET_DEV_URL
       : process.env.SOCKET_PROD_URL;
 
+  console.log("Checking the socket url");
+  console.log(socketUrl);
+
   io = new Server(server, {
     cors: {
       origin: socketUrl,
