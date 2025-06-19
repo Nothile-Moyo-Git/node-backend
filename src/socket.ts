@@ -23,11 +23,6 @@ export const init = (
       ? process.env.SOCKET_DEV_URL
       : process.env.SOCKET_PROD_URL;
 
-  console.log("Current environment");
-  console.log(process.env.NODE_ENV);
-  console.log("Checking the socket url");
-  console.log(socketUrl);
-
   io = new Server(server, {
     cors: {
       credentials: true,
