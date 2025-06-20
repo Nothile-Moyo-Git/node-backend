@@ -29,6 +29,7 @@ import {
   CheckCreateSessionResolverArgs,
   ParentParam,
 } from "./resolvers";
+import User from "../../models/user";
 
 // Set up client and database
 const client = new MongoClient(MONGODB_URI);
@@ -69,6 +70,12 @@ const PostSignupResolver = async (
     const userExists = users.length > 0;
 
     if (isNameValid && isEmailValid && isPasswordValid && doPasswordsMatch) {
+      // Instantiate our user object
+      const user = new User();
+
+      // Encrypt the password so it can't be read even if the database is breached
+      const encryptedPassword = user.generateHash(password);
+
       // Query the backend
       await fetch(`${API_ENDPOINT}/action/insertOne`, {
         method: "POST",
@@ -83,7 +90,7 @@ const PostSignupResolver = async (
           document: {
             name: name,
             email: email,
-            password: password,
+            password: encryptedPassword,
             posts: [],
           },
         }),
