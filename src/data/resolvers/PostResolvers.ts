@@ -360,12 +360,14 @@ const PostUpdatePostResolver = async (
   let isFileSizeValid = true;
   let isFileTypeValid = true;
   let isFileValid = true;
+  let wasFileUploaded = false;
 
   if (Object.keys(fileData).length !== 0) {
     isImageUrlValid = fileData.isImageUrlValid;
     isFileSizeValid = fileData.isFileSizeValid;
     isFileTypeValid = fileData.isFileTypeValid;
     isFileValid = fileData.isFileValid;
+    wasFileUploaded = true;
   }
 
   const isFileUploadSuccessful =
@@ -406,13 +408,13 @@ const PostUpdatePostResolver = async (
       }
 
       if (post && isPostCreator) {
-        post.fileLastUpdated = fileLastUpdated;
         // Delete the old image as we update the url with the new one
         if (isFileUploadSuccessful) {
-          if (environment === "development") {
+          if (environment === "development" && wasFileUploaded) {
             //deleteFile(post.imageUrl);
             post.fileName = fileData.fileName;
             post.imageUrl = fileData.imageUrl;
+            post.fileLastUpdated = fileLastUpdated;
           }
 
           if (environment === "production") {
