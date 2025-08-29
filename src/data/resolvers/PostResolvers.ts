@@ -362,11 +362,19 @@ const PostUpdatePostResolver = async (
   let isFileValid = true;
   let wasFileUploaded = false;
 
+  console.log("Carousel File Data");
+  console.log(carouselFileData);
+
+  // Checks the results of the file upload
   if (Object.keys(fileData).length !== 0) {
     isImageUrlValid = fileData.isImageUrlValid;
     isFileSizeValid = fileData.isFileSizeValid;
     isFileTypeValid = fileData.isFileTypeValid;
     isFileValid = fileData.isFileValid;
+    wasFileUploaded = true;
+  }
+
+  if (carouselFileData) {
     wasFileUploaded = true;
   }
 
@@ -417,7 +425,7 @@ const PostUpdatePostResolver = async (
             post.fileLastUpdated = fileLastUpdated;
           }
 
-          if (environment === "production") {
+          if (environment === "production" && wasFileUploaded) {
             post.fileName = carouselFileData.fileName;
             post.imageUrl = carouselFileData.imageUrl;
           }
