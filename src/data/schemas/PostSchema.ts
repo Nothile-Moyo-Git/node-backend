@@ -103,6 +103,7 @@ const PostQueries = new GraphQLObjectType({
       type: new GraphQLObjectType({
         name: "getAndValidatePost",
         fields: {
+          status: { type: GraphQLInt },
           message: { type: GraphQLString },
           success: { type: GraphQLBoolean },
           post: { type: PostType },

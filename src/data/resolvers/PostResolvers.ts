@@ -309,6 +309,7 @@ const GetAndValidatePostResolver = async (
       const postFormatted = formatPost(post);
 
       return {
+        status: 200,
         success: true,
         message: "Request successful",
         post: postFormatted,
@@ -316,6 +317,7 @@ const GetAndValidatePostResolver = async (
       };
     } else {
       return {
+        status: 400,
         success: false,
         message: "User is not validated or post is not found",
         post: post,
@@ -329,6 +331,7 @@ const GetAndValidatePostResolver = async (
     console.log("\n");
 
     return {
+      status: 500,
       success: false,
       message: error,
       post: null,
