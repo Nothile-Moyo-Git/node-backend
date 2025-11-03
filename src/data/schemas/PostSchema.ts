@@ -153,7 +153,6 @@ const PostMutations = new GraphQLObjectType({
         name: "editPost",
         fields: {
           post: { type: PostType },
-          user: { type: GraphQLString },
           status: { type: GraphQLInt },
           success: { type: GraphQLBoolean },
           message: { type: GraphQLString },
