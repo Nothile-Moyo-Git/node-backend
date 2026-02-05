@@ -19,7 +19,7 @@ export const init = (
   server: HTTPServer<typeof IncomingMessage, typeof ServerResponse>,
 ) => {
   const socketUrl =
-    process.env.NODE_ENV.trim() === "development"
+    process.env.NODE_ENV!.trim() === "development"
       ? process.env.SOCKET_DEV_URL
       : process.env.SOCKET_PROD_URL;
 

@@ -163,7 +163,9 @@ app.use(
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 // Implement Route handlers here
-app.use(feedRoutes, chatRoutes, socketRoutes);
+app.use(chatRoutes);
+app.use(feedRoutes);
+app.use(socketRoutes);
 
 // Handling graphql schemas and creating the endpoints for them
 app.all("/graphql/chat", createHandler({ schema: schemas.ChatSchema }));
@@ -188,7 +190,7 @@ const startServer = async () => {
   // Create a Mongoose connection
   await createMongooseConnection(() => {
     const instance =
-      process.env.NODE_ENV.trim() === "development"
+      process.env.NODE_ENV!.trim() === "development"
         ? `${process.env.DEVELOPMENT_URL}:${port}`
         : process.env.PRODUCTION_URL;
 

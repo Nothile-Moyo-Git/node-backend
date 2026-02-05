@@ -6,10 +6,10 @@
  * The auth route file. Handles all the routes for the requests we will perform from the front end
  */
 
-import express from "express";
+import express, { Router } from "express";
 import { testEndpoint, PostUploadFileController } from "../controllers/feed";
 
-const feedRoutes = express.Router({ strict: true });
+const feedRoutes: Router = express.Router({ strict: true });
 
 // Handle our api routes
 feedRoutes.get("/test", testEndpoint);

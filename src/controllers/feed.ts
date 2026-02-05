@@ -96,10 +96,9 @@ export const PostUploadFileController = async (
     }
   } catch (error) {
     // Error handling, you should see this in your backend server logs if the upload fails
-    console.log("\n\n");
-    console.log("Error : File upload failed, check logs below");
-    console.log(error);
-    console.log("\n\n");
+    console.error("Error");
+    console.error(error);
+    response.status(500).json("Internal server error");
   }
 };
 
@@ -115,15 +114,20 @@ export const PostUploadFileController = async (
 export const testEndpoint = (
   request: FeedRequestInterface,
   response: Response,
-) => {
+): void => {
   // Get environment data for production
-  const environment = process.env.NODE_ENV.trim();
+  const environment = process.env.NODE_ENV!.trim();
 
-  // Send a response to the browser or the frontend
-  response.status(201);
-  response.json({
-    message: "Test",
-    port: process.env.PORT,
-    environment,
-  });
+  try {
+    // Send a response to the browser or the frontend
+    response.status(201).json({
+      message: "Test",
+      port: process.env.PORT,
+      environment,
+    });
+  } catch (error) {
+    console.error("Error");
+    console.error(error);
+    response.status(500).json("Internal server error");
+  }
 };

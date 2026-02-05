@@ -15,16 +15,15 @@
 // Import Mongoose
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
 dotenv.config();
 
 // MongoDB url
-const MONGODB_URI = process.env.MONGODB_URI;
-const MONGODB_USERNAME = process.env.MONGODB_USERNAME;
-const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
-const DATA_API_KEY_NAME = process.env.DATA_API_KEY_NAME;
-const DATA_API_KEY = process.env.DATA_API_KEY;
-const API_ENDPOINT = process.env.API_ENDPOINT;
+const MONGODB_URI = process.env.MONGODB_URI!;
+const MONGODB_USERNAME = process.env.MONGODB_USERNAME!;
+const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD!;
+const DATA_API_KEY_NAME = process.env.DATA_API_KEY_NAME!;
+const DATA_API_KEY = process.env.DATA_API_KEY!;
+const API_ENDPOINT = process.env.API_ENDPOINT!;
 
 // MongoDB Uri
 // Note: To create this URL, copy the connect content and replace the rewrite with the url of the database

@@ -31,7 +31,7 @@ const database = client.db("backend");
 const postsCollection = database.collection("posts");
 
 // Get the environment we're working with so we can feature flag the carousel / file upload functionality
-const environment = process.env.NODE_ENV.trim();
+const environment = process.env.NODE_ENV!.trim();
 const fileLastUpdated =
   environment === "development" ? getCurrentMonthAndYear() : "";
 

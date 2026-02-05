@@ -144,9 +144,9 @@ export interface SocketRequest extends Request {
 }
 
 export interface FeedRequestInterface extends Request {
-  file: Express.Multer.File;
-  filename: string;
-  userId: ObjectId;
+  file?: Express.Multer.File;
+  filename?: string;
+  userId?: ObjectId;
 }
 
 export interface ErrorInterface extends Error {
