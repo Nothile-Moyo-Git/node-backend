@@ -114,15 +114,15 @@ const PostCreatePostResolver = async (
       : null;
 
     // Default values so we can set them agnostic of environment
-    let fileName = null;
-    let imageUrl = null;
+    let fileName = "";
+    let imageUrl = "";
     let isFileValid = true;
     let isFileTypeValid = true;
     let isImageUrlValid = true;
     let isFileSizeValid = true;
 
     // Logic if we upload a file, this should be for development
-    if (environment === "development") {
+    if (environment === "development" && fileData) {
       // Getting file data
       fileName = fileData.fileName;
       imageUrl = fileData.imageUrl;
@@ -130,8 +130,9 @@ const PostCreatePostResolver = async (
       isFileTypeValid = fileData.isFileTypeValid;
       isImageUrlValid = fileData.isImageUrlValid;
       isFileSizeValid = fileData.isFileSizeValid;
-    } else {
-      // Logic if we chose an image from the carousel, this should be for production
+    }
+
+    if (environment === "production" && carouselFileData) {
       fileName = carouselFileData.fileName;
       imageUrl = carouselFileData.imageUrl;
     }
@@ -417,15 +418,15 @@ const PostUpdatePostResolver = async (
 
       if (post && isPostCreator) {
         // Delete the old image as we update the url with the new one
-        if (isFileUploadSuccessful) {
-          if (environment === "development" && wasFileUploaded) {
+        if (isFileUploadSuccessful && wasFileUploaded) {
+          if (environment === "development" && fileData) {
             //deleteFile(post.imageUrl);
             post.fileName = fileData.fileName;
             post.imageUrl = fileData.imageUrl;
             post.fileLastUpdated = fileLastUpdated;
           }
 
-          if (environment === "production" && wasFileUploaded) {
+          if (environment === "production" && carouselFileData) {
             post.fileName = carouselFileData.fileName;
             post.imageUrl = carouselFileData.imageUrl;
           }
@@ -492,7 +493,7 @@ const PostDeletePostResolver = async (
 
   try {
     // Since production uses the carousel
-    const environment = process.env.NODE_ENV.trim();
+    const environment = process.env.NODE_ENV!.trim();
 
     // Get post data
     const post = await Post.findById(new ObjectId(postId));

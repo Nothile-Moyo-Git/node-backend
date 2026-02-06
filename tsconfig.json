@@ -4,6 +4,7 @@
     "types" : [
       "node", "multer"
     ],
+    "ignoreDeprecations": "6.0",
     "noResolve": false,
     "target": "ES6",                          
     "module": "ESNEXT",
