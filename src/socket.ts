@@ -24,6 +24,7 @@ export const init = (
       : process.env.SOCKET_PROD_URL;
 
   io = new Server(server, {
+    allowEIO3: true,
     cors: {
       credentials: true,
       origin: socketUrl,
