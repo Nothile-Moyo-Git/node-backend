@@ -32,7 +32,7 @@ export const PostUploadFileController = async (
     // If there is no image, send a response with a status of 400
     if (!request.file) {
       // Response
-      response.status(204).json({
+      response.status(400).json({
         creator: null,
         fileUploaded: false,
         isImageUrlValid: false,
