@@ -68,6 +68,7 @@ export interface CarouselFileData {
 export interface FileDataResolverArgs {
   fileName: string;
   imageUrl: string;
+  fileLastUpdated: string;
   isFileValid: boolean;
   isFileTypeValid: boolean;
   isImageUrlValid: boolean;

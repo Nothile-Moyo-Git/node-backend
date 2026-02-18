@@ -13,7 +13,16 @@
 
 import { FeedRequestInterface } from "../@types/index";
 import { Response } from "express";
-import { deleteFile, checkFileType } from "../util/file";
+import {
+  deleteFile,
+  checkFileType,
+  getCurrentMonthAndYear,
+} from "../util/file";
+
+// Calculate the upload date of the file if successful so we can return it to update post
+const environment = process.env.NODE_ENV!.trim();
+const fileLastUpdated =
+  environment === "development" ? getCurrentMonthAndYear() : "";
 
 /**
  * @name PostUploadFileController
@@ -35,6 +44,7 @@ export const PostUploadFileController = async (
       response.status(400).json({
         creator: null,
         fileUploaded: false,
+        fileLastUpdated: null,
         isImageUrlValid: false,
         isFileSizeValid: false,
         isFileTypeValid: false,
@@ -68,6 +78,7 @@ export const PostUploadFileController = async (
         response.status(400).json({
           creator: null,
           fileUploaded: false,
+          fileLastUpdated: null,
           isImageUrlValid: isImageUrlValid,
           isFileSizeValid: isFileSizeValid,
           isFileTypeValid: isFileTypeValid,
@@ -82,6 +93,7 @@ export const PostUploadFileController = async (
         response.status(200).json({
           creator: null,
           fileUploaded: true,
+          fileLastUpdated: fileLastUpdated,
           isImageUrlValid: true,
           isFileSizeValid: true,
           isFileTypeValid: true,

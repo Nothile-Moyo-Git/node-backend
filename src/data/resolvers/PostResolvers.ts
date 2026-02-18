@@ -423,7 +423,7 @@ const PostUpdatePostResolver = async (
             //deleteFile(post.imageUrl);
             post.fileName = fileData.fileName;
             post.imageUrl = fileData.imageUrl;
-            post.fileLastUpdated = fileLastUpdated;
+            post.fileLastUpdated = fileData.fileLastUpdated;
           }
 
           if (environment === "production" && carouselFileData) {
@@ -435,9 +435,6 @@ const PostUpdatePostResolver = async (
         // Update post details
         post.content = content;
         post.title = title;
-
-        console.log("Current post data");
-        console.log(post);
 
         await post.save();
       }
