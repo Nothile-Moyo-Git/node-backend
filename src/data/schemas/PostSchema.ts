@@ -43,6 +43,7 @@ const fileDataFields = {
   isFileSizeValid: { type: GraphQLBoolean },
   isFileTypeValid: { type: GraphQLBoolean },
   isFileValid: { type: GraphQLBoolean },
+  fileLastUpdated: { type: GraphQLString },
 };
 
 // Create a fileType that we return

@@ -391,11 +391,11 @@ const PostUpdatePostResolver = async (
 
       return {
         post: null,
-        status: 200,
+        status: 400,
         isContentValid: isContentValid,
         isTitleValid: isTitleValid,
-        success: true,
-        message: "200 : Request was successful",
+        success: false,
+        message: "400 : Request was unsuccessful",
         fileValidProps: fileData,
         isPostCreator: null,
       };
