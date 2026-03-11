@@ -376,7 +376,7 @@ const PostUpdatePostResolver = async (
   }
 
   if (carouselFileData) {
-    wasFileUploaded = true;
+    wasFileUploaded = false;
   }
 
   const isFileUploadSuccessful =
@@ -429,6 +429,7 @@ const PostUpdatePostResolver = async (
           if (environment === "production" && carouselFileData) {
             post.fileName = carouselFileData.fileName;
             post.imageUrl = carouselFileData.imageUrl;
+            post.fileLastUpdated = "";
           }
         }
 
