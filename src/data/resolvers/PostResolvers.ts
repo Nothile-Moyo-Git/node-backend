@@ -418,15 +418,21 @@ const PostUpdatePostResolver = async (
 
       if (post && isPostCreator) {
         // Delete the old image as we update the url with the new one
-        if (isFileUploadSuccessful && wasFileUploaded) {
-          if (environment === "development" && fileData) {
+        if (
+          isFileUploadSuccessful &&
+          wasFileUploaded &&
+          environment === "development"
+        ) {
+          if (fileData) {
             //deleteFile(post.imageUrl);
             post.fileName = fileData.fileName;
             post.imageUrl = fileData.imageUrl;
             post.fileLastUpdated = fileData.fileLastUpdated;
           }
+        }
 
-          if (environment === "production" && carouselFileData) {
+        if (isFileUploadSuccessful && !wasFileUploaded && carouselFileData) {
+          if (environment === "production") {
             post.fileName = carouselFileData.fileName;
             post.imageUrl = carouselFileData.imageUrl;
             post.fileLastUpdated = "";
