@@ -8,7 +8,7 @@ This is the back end documentation for the application. You can find more in dep
 
 -----
 
-### Commands
+## Commands
 
 > Start local development server (http://localhost:4000)
 ```
@@ -42,7 +42,7 @@ npm run build
 
 -----
 
-### Tech Stack
+## Tech Stack
 The current tech stack for the backend is:
 
 **Node.js**. Node.js is a runtime created based on the _"V8 Engine"_ by Google. This allows us to run our server and also use back end packages. It's also used to create production builds.
@@ -62,11 +62,13 @@ The current tech stack for the backend is:
 
 >[Cors](https://www.npmjs.com/package/cors)
 
-**Express**. Express is a key tool that we use in the codebase. It's used to create endpoints, handle requests, start a local server, work with socket.io in order to create subscriptions to other clients.
+**SocketIO**. SocketIO is an event driven library allowing us to create websockets using the observer pattern in order to perform requests in real time, allowing us to update the front end when new chat messages are sent or when posts are created. Toast notifications on the front end are used to reflect this. It does this by establishing connections between the observer and subscribers, then firing events when triggered by the backend.
+
+>[SocketIO](https://socket.io/)
 
 If you wish to start your local server, run the ```npm run start``` command to start your local server.
 
-**Note: You will have 2 separate consoles when running concurrent servers, so you'll need to check the console in both your browser and your terminal**
+**Note: You will have 2 separate consoles when running concurrent servers, so you'll need to check the console in both your browser and your terminal.**
 
 >[Express](https://expressjs.com/)
 
@@ -84,10 +86,6 @@ You can send me an email by request [here](mailto:nothile1@gmail.com)
 
 >[Mongoose](https://mongoosejs.com/docs/)
 
-**SocketIO**. SocketIO is used in the backend for realtime io for features such as livechat or sending updates for user notifications. It allows for communication to the front end without the need for an api to pre-emptively be executed.
-
->[SocketIO](https://socket.io/)
-
 **JWT** JWT, standing for json web token, is a tool that allows encrypted tokens to be used. This is typically for authentication. A token value is also used, as well as encryption to ensure that rogue queries can't be performed by an inauthenticated user.
 
 >[JWT](https://jwt.io/)
@@ -98,7 +96,7 @@ You can send me an email by request [here](mailto:nothile1@gmail.com)
 
 -----
 
-### Production and deployment
+## Production and deployment
 
 When running the local server, navigate to the following endpoint. It will return a JSON with a message inside it.
 
@@ -109,17 +107,20 @@ http://localhost:4000/test
 Production builds can be found in the _"api"_ folder. The production is your compiled javascript code found from _"src"_.
 
 >In order to create a build, run the following command
+
 ```
 npm run build
 ```
 
 >[View production](https://node-backend-k4sz.onrender.com/test)
 
+**Note: Render uses cold storage is the backend isn't currently in use, please be patient if the backend takes a moment to turn to hot storage.**
+
 **For security purposes, this application is deployed on Render for the backend only. The .env files have been copied on render and have *NOT* been pushed to git, you'll need to email me to request it.**
 
 -----
 
-### MVC Architecture
+## MVC Architecture
 
 The backend uses the MVC architecture. MVC stands for _"Model View Controller"_. 
 
@@ -131,7 +132,7 @@ The _**Controller**_ represents middleware which allows requests to be handled. 
 
 -----
 
-### Routing
+## Routing
 
 You can find the routes from _"backend/src/routes"_. The routes assign api requests to the appropriate controller which is then used to handle the request. 
 
@@ -143,7 +144,7 @@ Unlike the front end, requests are handled without a basename, and instead use t
 
 -----
 
-### File Storage
+## File Storage
 
 Multer is used to handle file uploads. This works by using an event handler on the front end to turn the image into a base64 image. This is sent to the backend and decoded back into an image. In the _index.ts_ file, we set up the location of where we store the file (which is based on the date/month of upload). Files are saved with a name that is used to format them.
 
@@ -153,7 +154,7 @@ For production builds, unfortunately, this feature has been flagged and disabled
 
 -----
 
-### Websockets
+## Websockets
 
 The socket.io implemention acts as an extension to the express server found in _"index.ts"_. You can find the socket code in _"socket.ts"_. This code uses a module export so that the socket functionality (mostly emitting and broadcasting) can be reused on individual controllers as opposed to just the main index file. 
 
@@ -165,7 +166,7 @@ The sockets are also used for message updates such as a new post being created f
 
 -----
 
-### GraphQL Endpoints
+## GraphQL Endpoints
 
 GraphQL is a query language that is used to make specific requests which improves performance and flexibility when requesting data from the backend.
 
@@ -183,27 +184,27 @@ _Note: You can find your resolvers in "/src/data/resolvers". The resolvers handl
 
 -----
 
-### REST Endpoints
+## REST Endpoints
 
 The endpoints that can't be handled by GraphQL are handled by REST queries. These are for chats, websockets and file uploads. This is because GraphQL doesn't natively support file uploads, and that websockets don't work alongside GraphQL either. 
 
-**Note: The base endpoint for rest is _/rest/uri_, if a route isn't handled, an error is returned**
+**Note: The base endpoint for rest is _/rest/<uri>_, if a route isn't handled, an error is returned**
 
 _Note: You can find the routes in "/src/routes"._
 
 -----
 
-### Cookies
+## Cookies
 
 Cookies are used and stored in the browser for session functionality. We also use them to store user data for the user who is currently logged in. Users are logged in for 2 week periods and if their login expires then they're locked off from executing certain routes.
 
 This also stops random attempts to query the backend without the proper authentication.
 
-In the interest of this application however, an encrypted token is sent to the backend which is using the _"sessions"_ collection. A json web token 
+In the interest of this application however, an encrypted token is sent to the backend which is using the _"sessions"_ collection.
 
 -----
 
-### Security
+## Security
 
 Regarding security for this application, many steps have been taken to ensure the security of the application.
 
@@ -215,10 +216,20 @@ For passwords in the backend, they are encrypted using _"bcrypt"_ which are stor
 
 Regarding controllers, queries check if the user is logged in and also return responses regarding this. This response is used by the front end to determine what should happen, which is usually a redirect onto the login page.
 
-### Overall thoughts
+## Overall thoughts
 
 I learned a lot working on this backend, mostly improving my understanding of how the backend works, the point of middleware, and how to best break down features.
 
 I think that learning Node.js is a valuable skill for any front end / full stack Engineer. 
 
 Node.js is an extremely flexible runtime with a lot of diversity and options on how you want to approach your backend, but this can lead to a shoestring-esque solution which will be hard to update.
+
+Getting the file uploads was hard because despite being able to encode them into base64. There is no free hosting option that allows for file uploads.
+
+It became a financial limitation for this app as it's a toy app, so instead, I allow users to upload their files in the development environment to their uploads folder instead of public.
+
+ORM's definitely have their uses, and the schema definitions are useful, but I do question the efficiency of using joins as they're more efficient
+
+I would also like to try out different solutions such as load balancing, rate limiting & caching for optimized backend performance.
+
+Thank you for taking the time to check out my project :).
