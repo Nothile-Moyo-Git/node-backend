@@ -8,7 +8,7 @@
  *
  */
 
-import { API_ENDPOINT, DATA_API_KEY, MONGODB_URI } from "../connection";
+import { MONGODB_URI } from "../connection";
 import { MongoClient, ObjectId } from "mongodb";
 import {
   createReadableDate,
@@ -76,25 +76,14 @@ const PostSignupResolver = async (
       // Encrypt the password so it can't be read even if the database is breached
       const encryptedPassword = user.generateHash(password);
 
-      // Query the backend
-      await fetch(`${API_ENDPOINT}/action/insertOne`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "api-key": DATA_API_KEY,
-        },
-        body: JSON.stringify({
-          collection: "users",
-          database: "backend",
-          dataSource: "backend",
-          document: {
-            name: name,
-            email: email,
-            password: encryptedPassword,
-            posts: [],
-          },
-        }),
-      });
+      // Update the user with the signup details and save them
+      user.name = name;
+      user.email = email;
+      user.password = encryptedPassword;
+      user.status = "active";
+      user.posts = [];
+
+      await user.save();
 
       return {
         isNameValid,
