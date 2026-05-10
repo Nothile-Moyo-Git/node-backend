@@ -37,6 +37,7 @@ import {
 import { createHandler } from "graphql-http/lib/use/express";
 import schemas from "./data/graphql";
 import { init } from "./socket";
+import rateLimiterMiddleware from "./util/rate-limiter";
 
 // Import the .env variables
 dotenv.config();
@@ -134,6 +135,9 @@ app.use(cors({ credentials: true }));
 
 // Allow flash messages to be used
 app.use(flash());
+
+// Apply our rate limiter
+app.use(rateLimiterMiddleware);
 
 // Here we create a session, but unlike before, we store it on the server side.
 // We instead store a secret key that's passed through to the backend

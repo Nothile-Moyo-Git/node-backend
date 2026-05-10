@@ -205,16 +205,18 @@ In the interest of this application however, an encrypted token is sent to the b
 -----
 
 ## Security
-
 Regarding security for this application, many steps have been taken to ensure the security of the application.
 
 **Note: This is a dummy application so some security measures may not have been taken**.
 
 Regarding requests, cors is implemented which allows only specified domains to query the backend. So far, these are localhost domains, and the functionality for this has been ensured.
 
+### Encryption
 For passwords in the backend, they are encrypted using _"bcrypt"_ which are stored on the server. The password is then compared to the password entered by the user after it's decrypted. We use bcrypt instead of md5 because md5 has been decrypted in many servers and is thus unsafe.
 
 Regarding controllers, queries check if the user is logged in and also return responses regarding this. This response is used by the front end to determine what should happen, which is usually a redirect onto the login page.
+
+### Rate limiting
 
 ## Overall thoughts
 
