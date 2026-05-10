@@ -120,6 +120,9 @@ const fileFilter = (
   }
 };
 
+// Apply our rate limiter
+app.use(rateLimiterMiddleware);
+
 // In order to handle file uploads, we must instantly call our multer method
 // The trailing method defines how many files we expect to upload, in this case its one
 // We then need to name the name of the field we're going to upload files from, in this case, it's image
@@ -135,9 +138,6 @@ app.use(cors({ credentials: true }));
 
 // Allow flash messages to be used
 app.use(flash());
-
-// Apply our rate limiter
-app.use(rateLimiterMiddleware);
 
 // Here we create a session, but unlike before, we store it on the server side.
 // We instead store a secret key that's passed through to the backend

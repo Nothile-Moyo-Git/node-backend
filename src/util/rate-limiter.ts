@@ -57,9 +57,10 @@ const rateLimiterMiddleware = async (
   try {
     await rateLimiter.consume(IP);
     next();
-  } catch {
+  } catch (error) {
     response.status(429).json({
       message: "Too many requests. Please try again later",
+      error: error,
       success: false,
     });
   }
