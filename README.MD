@@ -217,6 +217,15 @@ For passwords in the backend, they are encrypted using _"bcrypt"_ which are stor
 Regarding controllers, queries check if the user is logged in and also return responses regarding this. This response is used by the front end to determine what should happen, which is usually a redirect onto the login page.
 
 ### Rate limiting
+Rate limiting is a concept in which you limit the amount of requests that hit your endpoints within a certain period of time. This is for security purposes to prevent brute force and DDOS attacks.
+
+**NOTE: You can test the rate limiter locally by running the following command:**
+
+```
+node src\test\rate-limiter-test.js
+```
+
+It does this for all endpoints, and is run at the top of the _./src/index.ts_ file. 
 
 ## Overall thoughts
 
