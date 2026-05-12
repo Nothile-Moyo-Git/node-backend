@@ -24,8 +24,9 @@ import mongoose from "mongoose";
  */
 const rateLimiter = new RateLimiterMongo({
   storeClient: mongoose.connection,
-  points: 2,
+  points: 10,
   duration: 1,
+  execEvenly: true,
   blockDuration: 60,
 });
 
