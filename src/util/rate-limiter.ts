@@ -27,7 +27,7 @@ const rateLimiter = new RateLimiterMongo({
   points: 10,
   duration: 1,
   execEvenly: true,
-  blockDuration: 60,
+  blockDuration: 30,
 });
 
 /**
