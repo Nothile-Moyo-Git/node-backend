@@ -24,10 +24,10 @@ import mongoose from "mongoose";
  */
 const rateLimiter = new RateLimiterMongo({
   storeClient: mongoose.connection,
-  points: 10,
+  points: 4,
   duration: 1,
   execEvenly: true,
-  blockDuration: 30,
+  blockDuration: 60,
 });
 
 /**
